@@ -72,13 +72,20 @@
     <div class="crawler" style="top: 80%; animation-duration: 40s; animation-delay: 6s;">🪲</div>
 
     <!-- Header / Nav -->
-    <header class="max-w-6xl w-full mx-auto flex justify-between items-center py-4 border-b border-slate-800/60 relative z-10">
+    <header class="max-w-6xl w-full mx-auto flex flex-col sm:flex-row justify-between items-center py-4 border-b border-slate-800/60 relative z-10 gap-3">
         <div class="text-sky-400 font-bold tracking-wider text-sm">&gt; root@cryptographer:~#</div>
+        
+        <!-- Visitor IP Indicator -->
+        <div class="bg-slate-900 border border-slate-800 text-[11px] text-emerald-400 px-3 py-1.5 rounded-xl font-mono flex items-center gap-2 shadow-inner">
+            <i class="fa-solid fa-network-wired text-sky-400"></i>
+            <span>Visitor IP: <strong id="visitor-ip" class="text-white">Resolving...</strong></span>
+        </div>
+
         <div class="flex gap-3 text-xs items-center">
             <span class="inline-flex items-center px-2.5 py-1 rounded-full font-medium bg-emerald-950/80 text-emerald-400 border border-emerald-800/60">
-                <span class="w-1.5 h-1.5 mr-1.5 bg-emerald-400 rounded-full animate-pulse"></span> Status: Hunting Bugs
+                <span class="w-1.5 h-1.5 mr-1.5 bg-emerald-400 rounded-full animate-pulse"></span> Hunting
             </span>
-            <span id="bug-count" class="bg-slate-900 border border-slate-800 text-slate-200 px-3 py-1 rounded-full font-mono">0 Bug Squashed</span>
+            <span id="bug-count" class="bg-slate-900 border border-slate-800 text-slate-200 px-3 py-1 rounded-full font-mono">0 Squashed</span>
         </div>
     </header>
 
@@ -149,10 +156,37 @@
 
         </div>
 
-        <!-- Right Column: Tools & Writeups (2 Cols) -->
+        <!-- Right Column: Tools, Collaborator & Writeups (2 Cols) -->
         <div class="lg:col-span-2 space-y-6">
             
-            <!-- TOOL 1: Domain + URL + IP + CIDR & WILDCARD Extractor -->
+            <!-- TOOL 1: OOB Collaborator / Interactsh Monitor -->
+            <div class="glow-box p-6 rounded-2xl space-y-4">
+                <div class="border-b border-slate-800/80 pb-3 flex justify-between items-center">
+                    <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-satellite-dish text-emerald-400"></i> OOB Collaborator & Callback Hub
+                    </h2>
+                    <span class="text-[10px] text-emerald-400 font-mono animate-pulse">● Listener Active</span>
+                </div>
+                <p class="text-xs text-slate-400">
+                    Generate a unique tracking sub-domain payload to capture out-of-band requests (DNS / HTTP / Pingback) for SSRF, Blind XSS, and RCE testing.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <input id="collabUrl" readonly type="text" value="Click generate to create payload..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-emerald-300 font-mono">
+                    <button onclick="generateCollaborator()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl text-xs font-semibold shrink-0 transition-colors">Generate ID</button>
+                    <button onclick="simulateCallback()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-2 rounded-xl text-xs font-semibold shrink-0 transition-colors">Simulate Hit</button>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-[11px] text-slate-400 flex justify-between">
+                        <span>Incoming Interaction Logs:</span>
+                        <button onclick="clearLogs()" class="text-sky-400 hover:underline">Clear Logs</button>
+                    </div>
+                    <div id="collabLogs" class="terminal-screen p-3 rounded-xl text-[10px] font-mono h-28 overflow-y-auto space-y-1">
+                        <div>[11:38:00] Collaborator service online. Awaiting inbound connections...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL 2: Domain + URL + IP + CIDR & WILDCARD Extractor -->
             <div class="glow-box p-6 rounded-2xl space-y-4">
                 <div class="border-b border-slate-800/80 pb-3 flex justify-between items-center">
                     <h2 class="text-sm font-bold text-white flex items-center gap-2">
@@ -170,7 +204,7 @@
                 <div id="results" class="space-y-3"></div>
             </div>
 
-            <!-- TOOL 2: Universal Encoder / Decoder Suite -->
+            <!-- TOOL 3: Universal Encoder / Decoder Suite -->
             <div class="glow-box p-6 rounded-2xl space-y-4">
                 <div class="border-b border-slate-800/80 pb-3">
                     <h2 class="text-sm font-bold text-white flex items-center gap-2">
@@ -238,6 +272,16 @@
 
     <!-- Interactive Script Bundle -->
     <script>
+        // Fetch Visitor IP on Load
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visitor-ip').innerText = data.ip;
+            })
+            .catch(() => {
+                document.getElementById('visitor-ip').innerText = '127.0.0.1 (Local)';
+            });
+
         // Mosquito Swarm & Smasher Logic
         const numMosquitoes = 12;
         const mosquitoes = [];
@@ -257,7 +301,7 @@
             
             m.addEventListener('click', () => {
                 squashedCount++;
-                document.getElementById('bug-count').innerText = `${squashedCount} Bug Squashed`;
+                document.getElementById('bug-count').innerText = `${squashedCount} Squashed`;
                 m.style.transform = 'scale(2.2)';
                 m.style.opacity = '0';
                 setTimeout(() => {
@@ -290,6 +334,35 @@
             requestAnimationFrame(animateSwarm);
         }
         animateSwarm();
+
+        // Collaborator Hub Logic
+        function generateCollaborator() {
+            const token = Math.random().toString(36).substring(2, 10);
+            const collabDomain = `${token}.oob-cryptographer.net`;
+            document.getElementById("collabUrl").value = collabDomain;
+            const logs = document.getElementById("collabLogs");
+            logs.innerHTML += `<div class="text-emerald-400">[+] Generated unique listener token: ${token}</div>`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function simulateCallback() {
+            const tokenField = document.getElementById("collabUrl").value;
+            const logs = document.getElementById("collabLogs");
+            const timestamp = new Date().toLocaleTimeString();
+            const sourceIP = `${Math.floor(Math.random()*200)+10}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+            
+            if(tokenField.includes("Click generate")) {
+                alert("Please generate a collaborator ID first!");
+                return;
+            }
+
+            logs.innerHTML += `<div>[${timestamp}] <span class="text-amber-300">HTTP GET</span> from ${sourceIP} -> /${tokenField.split('.')[0]} (User-Agent: Mozilla/5.0)</div>`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function clearLogs() {
+            document.getElementById("collabLogs").innerHTML = `<div>[System] Interaction logs cleared.</div>`;
+        }
 
         // Extractor Logic
         function extractDomains(text) {
