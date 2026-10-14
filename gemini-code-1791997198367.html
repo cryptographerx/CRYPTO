@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptographer | Security Researcher & Bug Bounty Hunter</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Bug Cursor */
+        body, a, button {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'><text y='20' font-size='20'>🪲</text></svg>"), auto !important;
+        }
+
+        body {
+            background-color: #030712;
+            color: #94a3b8;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            overflow-x: hidden;
+        }
+
+        .glow-box {
+            background: rgba(17, 24, 39, 0.75);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            backdrop-filter: blur(16px);
+        }
+        .glow-box:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.12);
+        }
+
+        /* Scuttling background bugs */
+        .crawler {
+            position: fixed;
+            font-size: 1.2rem;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.25;
+            animation: crawl 20s linear infinite;
+        }
+
+        @keyframes crawl {
+            0% { transform: translate(-50px, -50px) rotate(0deg); }
+            25% { transform: translate(calc(100vw + 50px), 30vh) rotate(90deg); }
+            50% { transform: translate(50vw, calc(100vh + 50px)) rotate(180deg); }
+            75% { transform: translate(-50px, 70vh) rotate(270deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+
+        /* Mosquito swarm particles */
+        .mosquito {
+            position: fixed;
+            pointer-events: none;
+            font-size: 10px;
+            z-index: 99;
+            transition: transform 0.1s ease-out;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-6 md:p-12 selection:bg-sky-500 selection:text-white relative">
+
+    <!-- Background Crawling Bugs -->
+    <div class="crawler" style="top: 10%; animation-duration: 25s;">🕷️</div>
+    <div class="crawler" style="top: 70%; animation-duration: 35s; animation-delay: 5s;">🪳</div>
+    <div class="crawler" style="top: 40%; animation-duration: 30s; animation-delay: 2s;">🐜</div>
+
+    <!-- Header / Nav -->
+    <header class="max-w-3xl w-full mx-auto flex justify-between items-center py-4 border-b border-slate-800/60 relative z-10">
+        <div class="text-sky-400 font-bold tracking-wider text-sm">&gt; root@cryptographer:~#</div>
+        <div class="flex gap-4 text-xs">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full font-medium bg-emerald-950/80 text-emerald-400 border border-emerald-800/60">
+                <span class="w-1.5 h-1.5 mr-1.5 bg-emerald-400 rounded-full animate-pulse"></span> Status: Hunting Bugs
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl w-full mx-auto space-y-8 my-10 relative z-10">
+        
+        <!-- Profile Intro -->
+        <div class="glow-box p-8 rounded-2xl transition-all duration-300">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-6">
+                <div class="w-16 h-16 rounded-xl bg-sky-950/80 border border-sky-800/60 flex items-center justify-center text-sky-400 text-2xl font-bold shrink-0 shadow-lg shadow-sky-950">
+                    C
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-white tracking-tight">Cryptographer</h1>
+                    <p class="text-sky-400 text-sm mt-1">Offensive Security Researcher & Bug Bounty Hunter</p>
+                </div>
+            </div>
+            <p class="text-sm leading-relaxed text-slate-300">
+                Specializing in web application security, finding bypasses via modified HTTP requests, and analyzing complex attack surfaces. Recognized across major platforms including HackerOne, Bugcrowd, and Google.
+            </p>
+            <div class="mt-6 pt-6 border-t border-slate-800/60 flex flex-wrap gap-4 text-xs">
+                <a href="mailto:cryptographer@wearehackerone.com" class="text-sky-400 hover:text-sky-300 flex items-center gap-2">
+                    <i class="fa-solid fa-envelope"></i> cryptographer@wearehackerone.com
+                </a>
+            </div>
+        </div>
+
+        <!-- Platforms Grid -->
+        <div class="space-y-3">
+            <h2 class="text-xs uppercase tracking-widest text-slate-500 font-semibold px-1">Platforms & Profiles</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                
+                <!-- HackerOne -->
+                <a href="https://hackerone.com/cryptographer" target="_blank" class="glow-box p-4 rounded-xl flex items-center justify-between group transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-red-400">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-xs font-semibold">HackerOne</div>
+                            <div class="text-[11px] text-slate-400">@cryptographer</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500 group-hover:text-sky-400 transition-colors"></i>
+                </a>
+
+                <!-- Bugcrowd -->
+                <a href="https://bugcrowd.com/h/cryptographer" target="_blank" class="glow-box p-4 rounded-xl flex items-center justify-between group transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-orange-400">
+                            <i class="fa-solid fa-crosshairs"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-xs font-semibold">Bugcrowd</div>
+                            <div class="text-[11px] text-slate-400">@cryptographer</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500 group-hover:text-sky-400 transition-colors"></i>
+                </a>
+
+                <!-- Google Hall of Fame -->
+                <a href="https://bughunters.google.com/profile/0851baf1-aa57-47e5-8a40-33d84da29a61" target="_blank" class="glow-box p-4 rounded-xl flex items-center justify-between group transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-blue-400">
+                            <i class="fa-brands fa-google"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-xs font-semibold">Google Hall of Fame</div>
+                            <div class="text-[11px] text-slate-400">Honorable Mention</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500 group-hover:text-sky-400 transition-colors"></i>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Articles / Writeups -->
+        <div class="space-y-3">
+            <h2 class="text-xs uppercase tracking-widest text-slate-500 font-semibold px-1">Writeups & Publications</h2>
+            <div class="space-y-3">
+                
+                <!-- Article 1 -->
+                <a href="https://medium.com/@xcryptographer/1-000-bounty-for-bypassing-restrictions-via-modified-http-request-8a195a72ded7" target="_blank" class="glow-box p-5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 group transition-all duration-300">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-xs text-sky-400">
+                            <i class="fa-brands fa-medium"></i> Medium Writeup
+                        </div>
+                        <h3 class="text-white text-sm font-medium group-hover:text-sky-300 transition-colors">
+                            $1,000 Bounty for Bypassing Restrictions via Modified HTTP Request
+                        </h3>
+                    </div>
+                    <span class="text-xs text-slate-400 flex items-center gap-1 shrink-0 group-hover:text-sky-400">
+                        Read Article <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </span>
+                </a>
+
+                <!-- Article 2 -->
+                <a href="https://medium.com/@xcryptographer/bug-bounty-is-changing-fast-ai-wont-save-you-if-you-don-t-know-how-to-hunt-98e29fed9666" target="_blank" class="glow-box p-5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 group transition-all duration-300">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-xs text-sky-400">
+                            <i class="fa-brands fa-medium"></i> Medium Article
+                        </div>
+                        <h3 class="text-white text-sm font-medium group-hover:text-sky-300 transition-colors">
+                            Bug Bounty is Changing Fast: AI Won't Save You If You Don't Know How to Hunt
+                        </h3>
+                    </div>
+                    <span class="text-xs text-slate-400 flex items-center gap-1 shrink-0 group-hover:text-sky-400">
+                        Read Article <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </span>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="space-y-3">
+            <h2 class="text-xs uppercase tracking-widest text-slate-500 font-semibold px-1">Connect</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <!-- Twitter/X -->
+                <a href="https://x.com/X_cryptographer" target="_blank" class="glow-box p-4 rounded-xl flex items-center justify-between group transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-sky-400">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-xs font-semibold">X (Twitter)</div>
+                            <div class="text-[11px] text-slate-400">@X_cryptographer</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500 group-hover:text-sky-400 transition-colors"></i>
+                </a>
+
+                <!-- Medium Profile -->
+                <a href="https://medium.com/@xcryptographer" target="_blank" class="glow-box p-4 rounded-xl flex items-center justify-between group transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-200">
+                            <i class="fa-brands fa-medium"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-xs font-semibold">Medium Publication</div>
+                            <div class="text-[11px] text-slate-400">@xcryptographer</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500 group-hover:text-sky-400 transition-colors"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-3xl w-full mx-auto text-center text-xs text-slate-600 py-6 border-t border-slate-800/60 relative z-10">
+        &copy; 2026 Cryptographer. Built for the Bug Bounty Community.
+    </footer>
+
+    <!-- Mosquito Swarm Generator Script -->
+    <script>
+        const numMosquitoes = 12;
+        const mosquitoes = [];
+        const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        for (let i = 0; i < numMosquitoes; i++) {
+            const m = document.createElement('div');
+            m.className = 'mosquito';
+            m.innerHTML = i % 2 === 0 ? '🦟' : '🪰';
+            document.body.appendChild(m);
+            mosquitoes.push({
+                element: m,
+                x: mouse.x + (Math.random() * 100 - 50),
+                y: mouse.y + (Math.random() * 100 - 50),
+                speed: 0.05 + Math.random() * 0.08,
+                offset: Math.random() * 100
+            });
+        }
+
+        function animateSwarm() {
+            let time = Date.now() * 0.005;
+            mosquitoes.forEach((m, index) => {
+                let targetX = mouse.x + Math.sin(time + m.offset) * 45;
+                let targetY = mouse.y + Math.cos(time * 1.2 + m.offset) * 45;
+                
+                m.x += (targetX - m.x) * m.speed;
+                m.y += (targetY - m.y) * m.speed;
+
+                m.element.style.transform = `translate(${m.x}px, ${m.y}px)`;
+            });
+            requestAnimationFrame(animateSwarm);
+        }
+        animateSwarm();
+    </script>
+</body>
+</html>
